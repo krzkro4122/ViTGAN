@@ -2,7 +2,8 @@ import os
 
 from torchvision import datasets, transforms
 
-DATA_PATH = os.getenv("SCRATCH", ".")
+SCRATCH = os.getenv("SCRATCH", ".")
+DATA_PATH = os.path.join(SCRATCH, "data/cifar-10-python")
 
 
 def get_dataset(dataset):

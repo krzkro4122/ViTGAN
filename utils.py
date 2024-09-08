@@ -20,6 +20,10 @@ IMAGES_DIR = os.path.join(SAVE_DIR, "images")
 MODEL_DIR = os.path.join(SAVE_DIR, "model")
 
 
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(SAVE_DIR, exist_ok=True)
+os.makedirs(MODEL_DIR, exist_ok=True)
+
 
 class Logger(object):
     """Reference: https://gist.github.com/gyglim/1f8dfb1b5c82627ae3efcfbbadb9f514"""

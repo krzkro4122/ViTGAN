@@ -1,1 +1,8 @@
 *.pyc
+*.deb
+data
+events.*
+*.npz
+wandb
+run-*
+logs

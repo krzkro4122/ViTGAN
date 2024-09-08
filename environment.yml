@@ -1,4 +1,4 @@
-name: contrad
+name: gan
 channels:
   - pytorch
   - defaults
@@ -18,9 +18,8 @@ dependencies:
   - torchvision
   - tqdm
   - pip:
-    - gin-config==0.3.0
-    - gpustat
-    - psutil
-    - tensorboardx
-    - kornia
-
+      - gin-config==0.3.0
+      - gpustat
+      - psutil
+      - tensorboardx
+      - kornia==0.3.0
