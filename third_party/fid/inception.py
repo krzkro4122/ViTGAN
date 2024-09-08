@@ -13,7 +13,7 @@ except ImportError:
 # Inception weights ported to Pytorch from
 # http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
 FID_WEIGHTS_URL = 'https://github.com/mseitzer/pytorch-fid/releases/download/fid_weights/pt_inception-2015-12-05-6726825d.pth'
-FID_WEIGHTS_LOCAL = 'third_party/fid/pt_inception-2015-12-05-6726825d.pth'
+FID_WEIGHTS_LOCAL = os.path.join(os.getenv("SCRATCH", "."), 'third_party/fid/pt_inception-2015-12-05-6726825d.pth')
 
 class InceptionV3(nn.Module):
     """Pretrained InceptionV3 network returning feature maps"""

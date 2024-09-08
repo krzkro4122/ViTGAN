@@ -15,7 +15,7 @@ def make_folder(path):
         os.makedirs(os.path.join(path))
 
 
-DATA_PATH = os.environ.get('DATA_DIR', 'data/')
+DATA_PATH = os.getenv("SCRATCH", ".")
 DATA_PATH = pathlib.Path(f"{DATA_PATH}/CelebAMask-HQ/")
 
 MAPPING = DATA_PATH / "CelebA-HQ-to-CelebA-mapping.txt"

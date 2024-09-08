@@ -11,7 +11,7 @@ import fid
 ########
 # PATHS
 ########
-DATA_DIR = os.environ.get('DATA_DIR', 'data/')
+DATA_DIR = os.getenv("SCRATCH", ".")
 
 data_path = f"{DATA_DIR}/afhq/dog/train/images" # set path to training set images
 output_path = 'resources/fid_stats_afhq_dog.npz'  # path for where to store the statistics

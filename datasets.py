@@ -2,7 +2,7 @@ import os
 
 from torchvision import datasets, transforms
 
-DATA_PATH = os.environ.get('DATA_DIR', 'data/')
+DATA_PATH = os.getenv("SCRATCH", ".")
 
 
 def get_dataset(dataset):
@@ -22,8 +22,8 @@ def get_dataset(dataset):
 
     elif dataset == 'cifar10_lin' or dataset == 'cifar100_lin':
         """CIFAR-10/100 for linear evaluation.
-        We follow the augmentation scheme used in [1] specially for linear evaluation. 
-        
+        We follow the augmentation scheme used in [1] specially for linear evaluation.
+
         [1] https://github.com/HobbitLong/SupContrast
         """
 
@@ -49,7 +49,7 @@ def get_dataset(dataset):
     elif dataset == 'cifar10_hflip' or dataset == 'cifar100_hflip':
         """CIFAR-10/100 with HFlip augmentation.
         Only used for training DiffAug models as per [1].
-        
+
         [1] Zhao et al., Differentiable Augmentation for Data-efficient GAN Training, NeurIPS 2020.
         """
 

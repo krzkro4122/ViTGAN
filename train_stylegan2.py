@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+import os
 from pathlib import Path
 import shutil
 
@@ -150,7 +151,7 @@ def get_options_dict(dataset=gin.REQUIRED,
 def train(P, opt, train_fn, models, optimizers, train_loader, logger):
     generator, discriminator, g_ema = models
     opt_G, opt_D = optimizers
-    
+
     losses = {'G_loss': [], 'D_loss': [], 'D_penalty': [],
               'D_real': [], 'D_gen': [], 'D_r1': []}
     metrics = {}
@@ -290,14 +291,15 @@ def train(P, opt, train_fn, models, optimizers, train_loader, logger):
                 'optim_D': opt_D.state_dict(),
             }, logger.logdir + '/optim.pt')
 
+base_dir = os.getenv("HOME", "./")
 
 def worker(P):
-    gin.parse_config_files_and_bindings(['configs/defaults/gan.gin',
-                                         'configs/defaults/augment.gin',
+    gin.parse_config_files_and_bindings([os.path.join(base_dir, 'rep/ViTGAN/configs/defaults/gan.gin'),
+                                         os.path.join(base_dir,'rep/ViTGAN/configs/defaults/augment.gin'),
                                          P.gin_config], [])
 
     options = get_options_dict()
-    
+
     train_set, _, image_size = get_dataset(dataset=options['dataset'])
     train_loader = DataLoader(train_set, shuffle=True, pin_memory=True, num_workers=P.workers,
                               batch_size=options['batch_size'], drop_last=True)
@@ -353,7 +355,7 @@ def worker(P):
 
         logger = Logger(f'{P.filename}_{_desc}{P.comment}', subdir=f'gan_dp/{P.gin_stem}/{P.architecture}')
         wandb.init(project='vitgan', name=f'{P.gin_stem}_{P.architecture}_' + f'{P.filename}_{_desc}{P.comment}')
-        
+
         wandb.config.update(P)
         wandb.config.update(options)
 

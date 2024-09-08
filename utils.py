@@ -12,11 +12,20 @@ import numpy as np
 from tensorboardX import SummaryWriter
 
 
+START_TIME = datetime.now()
+BASE_DIR = os.getenv("SCRATCH", ".")
+OUTPUT_DIR = os.path.join(f"{BASE_DIR}", "output")
+SAVE_DIR = os.path.join(OUTPUT_DIR, START_TIME.strftime("%Y%m%d-%H%M%S"))
+IMAGES_DIR = os.path.join(SAVE_DIR, "images")
+MODEL_DIR = os.path.join(SAVE_DIR, "model")
+
+
+
 class Logger(object):
     """Reference: https://gist.github.com/gyglim/1f8dfb1b5c82627ae3efcfbbadb9f514"""
     def __init__(self, fn, subdir=None, resume=None):
-        if not os.path.exists("./logs/"):
-            os.mkdir("./logs/")
+        if not os.path.exists(os.path.join(OUTPUT_DIR, "logs")):
+            os.mkdir(os.path.join(OUTPUT_DIR, "logs"))
 
         if resume:
             logdir = resume

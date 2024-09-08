@@ -23,12 +23,14 @@ import augment
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+from utils import OUTPUT_DIR, MODEL_DIR
+
 
 def parse_args():
     parser = ArgumentParser(description='Testing script: Sampling from G via cDDLS')
-    parser.add_argument('logdir', type=str,
+    parser.add_argument('logdir', type=str, default=OUTPUT_DIR,
                         help='Path to the logdir that contains the (best) checkpoints of G and D')
-    parser.add_argument('linear_path', type=str,
+    parser.add_argument('linear_path', type=str, default=MODEL_DIR,
                         help='Path to the checkpoint trained from linear evaluation')
     parser.add_argument('architecture', type=str, help='Architecture')
 
@@ -146,5 +148,3 @@ if __name__ == '__main__':
                 if index == P.n_samples:
                     break
                 save_image(samples[j], f"{subsubdir_path}/{index}.png")
-
-
